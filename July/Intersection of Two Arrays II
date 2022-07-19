@@ -1,0 +1,41 @@
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+//       WA
+//         int n1 = nums1.length;
+//         int n2 = nums2.length;
+//         int c = 0;
+//         for(int i=n1;i<n1+n2;i++){
+//             for(int j=c;j<n2;j++){
+//                 if(nums1[i] != nums2[i]){
+//                     c++;
+//                     break;
+//                 }
+                
+//             }
+//         }int ans = Arrays.sort(nums1);
+//         return ans;
+        
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        ArrayList<Integer> al = new ArrayList<>();
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i=0,j=0;
+        while(i<n1 && j<n2){
+            if(nums1[i]>nums2[j])j++;
+            else if(nums1[i]<nums2[j])i++;
+            else{
+                al.add(nums2[j]);
+                i++;
+                j++;
+            }
+        }
+        int ans[]=new int[al.size()];
+        int c=0;
+        for(int k : al){
+            ans[c++] = k; // arr to int
+            //count++;
+        }
+        return ans;
+    }
+}
