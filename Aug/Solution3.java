@@ -1,0 +1,30 @@
+public class Solution3 {
+    public ListNode rotateRight(ListNode head, int k) {
+        //TC -> O(N) && SC -> O(1)
+        // TAke head node and a dummy node
+        // until dummy.next == null , count++;
+        //
+        
+        
+        if(head == null) return head;
+        if(k==0) return head;
+        
+        int len =0;
+        ListNode dummy = head;
+        while(dummy.next != null){
+            len++;
+            dummy = dummy.next;
+        } 
+        len++; 
+        dummy.next = head; //linking of the last node to the head
+        
+        int pivot = len -(k%len); //tottal num of cycles = (k%len) laps
+        dummy = head; // rotated list head
+        
+        while(pivot-- > 1) dummy=dummy.next;
+        
+        head = dummy.next; //updating the new head after rotation
+        dummy.next = null;
+        return head;
+    }
+}
