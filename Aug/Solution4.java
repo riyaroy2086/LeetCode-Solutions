@@ -1,5 +1,4 @@
 public class Solution4 {
- 
     private void swap(int nums[], int i,int j){
         while(i<j){
             int temp = nums[i]; // 2 pointer concept
