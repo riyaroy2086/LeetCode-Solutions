@@ -13,13 +13,14 @@
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
         if (head==null) return null;
-        ListNode answer, countHelper, temp;
-        answer = countHelper = temp = head;
+        ListNode answer, temp;
+        answer = temp = head;
         int count = 0;
-        while (countHelper!= null) {
-            countHelper = countHelper.next;
+        while (temp!= null) {
+            temp = temp.next;
             count ++;
         }
+        temp = head;
         k = k % count;
         for (int i = 0; i < k ; i++) {
             temp = temp.next;
