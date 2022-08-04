@@ -1,0 +1,66 @@
+Link to soln : https://leetcode.com/problems/sort-list/submissions/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        
+        // Using merge sort and 2 -pointer method slow and fast
+        if(head == null || head.next == null) return head;
+        
+        ListNode dummy=head;
+        ListNode slow=head;
+        ListNode fast=head;
+        
+        // dummy=slow=fast=head;
+        //left_list--> head = head & tail =dummy
+        //rt_list--> head = slow and tail = fast
+        
+        while(fast != null && fast.next != null){
+            dummy = slow;
+            slow=slow.next;
+            fast=fast.next.next; 
+        }
+        dummy.next = null;
+        ListNode lt = sortList(head), rt = sortList(slow);
+        
+        // merger sort after sorting the two lists
+        return mergeSort(lt,rt);
+     
+    }
+    public ListNode mergeSort(ListNode l1, ListNode l2){
+        ListNode sorted_list =new ListNode(0);
+        ListNode curr = sorted_list;
+        
+        // Beaware of null pointer exceptions here 
+        while(l1 != null && l2 != null){
+            if(l1.val <l2.val){
+                curr.next = l1;
+                l1=l1.next;
+            }else {
+                curr.next = l2;
+                l2= l2.next;
+            }
+            curr= curr.next;
+        }
+        if(l1 !=null){
+           curr.next = l1;
+           l1=l1.next;
+        }
+        if(l2 !=null){
+           curr.next = l2;
+           l2=l2.next;
+        }
+        return sorted_list.next; //head of the new list    
+    }
+    
+    
+}
