@@ -1,3 +1,5 @@
+https://leetcode.com/submissions/detail/762583541/
+
 public class Solution2 {
     public int maxArea(int[] height) {
         // BRUTE FORCE
