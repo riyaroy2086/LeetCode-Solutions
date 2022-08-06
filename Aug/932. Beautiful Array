@@ -1,0 +1,33 @@
+class Solution {
+    public int[] beautifulArray(int n) {
+        // TC -> O(N)
+        // SC-> O(N) storing the ans in ana array of length n
+        
+       
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(1);
+        while(ans.size()<n){
+            ArrayList<Integer> dum = new ArrayList<>();
+            //for ODD
+            for(int i=0;i<ans.size();i++){
+                if(ans.get(i)*2-1 <= n) 
+                    dum.add(ans.get(i)*2-1);
+            }
+            //for EVEN
+            for(int i=0;i<ans.size();i++){
+                if(ans.get(i)*2 <= n) 
+                    dum.add(ans.get(i)*2);
+            }
+            ans=dum;
+        }
+        
+        int l = ans.size();
+        // converting arraylist to array
+        int res[] = new int[l];
+        
+        for(int i=0;i<l;i++){
+            res[i] = ans.get(i);
+        }
+        return res;
+    }
+}
