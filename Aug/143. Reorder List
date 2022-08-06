@@ -1,0 +1,124 @@
+https://leetcode.com/submissions/detail/766538265/
+
+// /**
+//  * Definition for singly-linked list.
+//  * public class ListNode {
+//  *     int val;
+//  *     ListNode next;
+//  *     ListNode() {}
+//  *     ListNode(int val) { this.val = val; }
+//  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+//  * }
+//  */
+// class Solution {
+//     public void reorderList(ListNode head) {
+//         // reverse a ll
+//         // odd even ll
+    
+//         // input ll: 1->2->3->4->5 
+//         // split into half : 1->2->3->null; 
+//         //                   4->5-> null;
+//         // reverse the 2nd ll; 
+//         // 1->2->3->null; 
+//         // 5->4->null;
+//         // 1->5->2->4->3-> null
+        
+//         //SOLN :
+        
+//         if(head == null || head.next==null) return;
+        
+//         ListNode slow = head,fast = head;
+        
+//         if(fast != null && fast.next != null){
+//             // prev = slow;      // prev : tail of lt & head1 = head of lt
+//             slow=slow.next;   // slow : head of rt & fast : tail of rt
+//             fast=fast.next.next;
+//         }
+       
+//         //prev.next= null; // 1->2->3-> null 
+        
+//         // ListNode l2 = reverse_seclist(slow); // l2 -> the head of the 2nd half --> now reversed
+        
+//         // mergelists(l1,l2);
+        
+//         ListNode prev = null;
+//         // ListNode curr = head;
+//         ListNode curr = slow , dummy;
+        
+//         while(curr != null){
+//             dummy = curr.next;
+//             curr.next = prev;
+//             prev = curr;
+//             curr = dummy;
+//         }
+//         // return prev; 
+        
+        
+//         ListNode n1 = head, n2 = prev;
+//         while(n2.next != null){
+// //             ListNode l1Next = l1.next;
+// //             ListNode l2Next = l2.next;
+            
+// //             l1.next =l2;
+// //             if(l1Next == null) break;
+            
+// //             l2.next = l1Next;
+// //             l1=l1Next;
+// //             l2=l2Next;
+//             dummy = n1.next;
+//             n1.next = n2;
+//             n1 = dummy;
+            
+//             dummy = n2.next;
+//             n2.next = n1;
+//             n2 = dummy;
+//         }
+        
+//     }
+    
+// //     public ListNode reverse_seclist(ListNode head){
+// //         ListNode prev = null;
+// //         ListNode curr = head;
+// //         ListNode nextN;
+        
+// //         while(curr != null){
+// //             nextN = curr.next;
+// //             curr.next = prev;
+// //             prev = curr;
+// //             curr = nextN;
+// //         }
+// //         return prev;
+// //     }
+     
+// }
+
+
+class Solution {
+    public void reorderList(ListNode head) {
+        if(head == null || head.next == null) return;
+        
+        ListNode slow = head, fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode prev = null, curr = slow, tmp;
+        while(curr != null){
+            tmp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = tmp;
+        }
+        
+        ListNode n1 = head, n2 = prev;
+        while(n2.next != null){
+            tmp = n1.next;
+            n1.next = n2;
+            n1 = tmp;
+            
+            tmp = n2.next;
+            n2.next = n1;
+            n2 = tmp;
+        }
+    }
+}
