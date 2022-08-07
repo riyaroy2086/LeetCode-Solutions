@@ -1,0 +1,49 @@
+https://leetcode.com/submissions/detail/767726938/
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+//TC -> O(N)
+class Solution {
+    // ArrayList ans = new ArrayList<>();
+    public List<List<Integer>> levelOrder(Node root) {
+        // make work here --> with every null shift to next line
+        List<List<Integer>> ans = new ArrayList<>();
+        if (root == null) return ans;
+        
+        //Taking a queue 
+        Queue<Node> q = new LinkedList<>(); // will be used to perform bfs operation (same level)
+        //offer() method is used to insert a particular element into the Priority Queue.
+        q.offer(root);
+        
+        // VVIMP template
+        while(!q.isEmpty()){
+            int size = q.size(); // no. of nodes at that particular level
+            List<Integer> nodes_in_one_level = new ArrayList<>();// stores all the nodes at that particular level
+            //this while loop is traversal of one particular level
+            while(size-- >0){
+                Node head = q.poll(); // pop = poll 
+                nodes_in_one_level.add(head.val); // storing those heads here
+                for(Node child : head.children) // traversing over all the children of the head
+                    q.offer(child); // add = offer
+            }
+            ans.add(nodes_in_one_level);
+        }
+        return ans;
+    }
