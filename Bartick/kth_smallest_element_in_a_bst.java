@@ -19,21 +19,14 @@ class Solution {
     public int kthSmallest(TreeNode root, int k) {
         Set<Integer> ans = new TreeSet<Integer>();
         inorderTraversal(root, ans);
-        Iterator<Integer> itr = ans.iterator();
-        while(k>1){
-          itr.next();
-          k--;
-        }
-        return itr.next();
+        List<Integer> answer = new ArrayList<Integer>(ans);
+        return answer.get(k-1);
         
     }
     void inorderTraversal(TreeNode node, Set<Integer>ans) {
         if (node == null) return;
-  
         inorderTraversal(node.left, ans);
-  
         ans.add(node.val);
-  
         inorderTraversal(node.right, ans);
     }
 }
