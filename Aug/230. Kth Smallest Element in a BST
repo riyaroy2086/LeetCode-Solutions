@@ -1,0 +1,37 @@
+https://leetcode.com/submissions/detail/767738532/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // static has to be here bcoz 
+    // ans.add(root.val); 
+    // is non-static
+    static ArrayList<Integer> ans = new ArrayList<>();
+    // Preorder traversal
+    static void Preorder(TreeNode root){
+        if(root == null ) return;
+        ans.add(root.val);
+        Preorder(root.left);
+        Preorder(root.right);
+    }
+    // Sorting and kth smallest
+    public int kthSmallest(TreeNode root, int k) {
+        ans = new ArrayList<Integer>();
+        Preorder(root);
+        Collections.sort(ans);
+        return ans.get(k-1);
+    }   
+}
