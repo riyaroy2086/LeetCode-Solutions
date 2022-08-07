@@ -1,0 +1,37 @@
+https://leetcode.com/submissions/detail/767685842/
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+// Using recursion
+class Solution {
+    ArrayList ans = new ArrayList<>();
+    public List<Integer> postorder(Node root) {
+        adding_nodes(root);
+        return ans;
+       
+    }
+    void adding_nodes(Node root){
+        if (root == null) return;
+        
+        for(Node i : root.children)
+            adding_nodes(i); 
+        
+        ans.add(root.val);
+    }
+}
