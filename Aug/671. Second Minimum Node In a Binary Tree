@@ -1,0 +1,38 @@
+https://leetcode.com/submissions/detail/768540476/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //static List<Integer> arr = new ArrayList<>();
+    //static to non-static probs
+    List<Integer> arr = new ArrayList<>();
+    // DFS : DEPTH FIRST SEARCH
+    public void DFS(TreeNode root) {
+        if(root == null) return;
+        
+        if(!arr.contains(root.val)) arr.add(root.val);
+        DFS(root.left);
+        DFS(root.right);
+    }
+    public int findSecondMinimumValue(TreeNode root) {
+        //arr = new ArrayList<>();
+        DFS(root);
+        Collections.sort(arr);
+        if(arr.size()>1)
+            return arr.get(1);
+        else return -1;
+    }
+}
