@@ -1,0 +1,38 @@
+https://leetcode.com/submissions/detail/769402623/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+//Tc & SC -> O(N)
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        //left -> rt
+        //rt -> lt
+        return root == null || isSymmetricOrNot(root.left, root.right);
+        // 2 is the root of the rt and lt sub-tree
+    }
+    private boolean isSymmetricOrNot(TreeNode left,TreeNode right){
+        if(left == null || right== null) return left==right;
+        if(left.val != right.val) return false;
+        // else
+            //move to left for left && move to rt for rt
+            // if equal checking for its children
+            // checking for the other root
+        
+        // after traversal if every node is equal == symmetrical
+        return isSymmetricOrNot(left.left,right.right) && isSymmetricOrNot(left.right,right.left);
+    }
+}
