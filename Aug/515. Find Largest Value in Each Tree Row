@@ -1,0 +1,41 @@
+https://leetcode.com/submissions/detail/769102215/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // root will be there
+    // traversing and finding the largest
+    // only value largest
+    
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> arr = new ArrayList<>();
+        // current level =0;
+        DFS(root,arr,0);
+        return arr;
+    }
+    public void DFS(TreeNode root , List<Integer> arr , int level){
+        if(root == null) return;
+        if(level == arr.size()){
+            arr.add(root.val); // adding 3 &b 2
+        }else{
+            arr.set(level,Math.max(arr.get(level), root.val));
+        }// max for that curr level--> Math.max(2,3)
+        
+        DFS(root.left,arr,level+1); // recursive calls
+        DFS(root.right,arr,level+1);
+        
+    }
+}
