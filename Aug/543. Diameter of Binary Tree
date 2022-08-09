@@ -1,0 +1,40 @@
+https://leetcode.com/submissions/detail/769054114/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        
+        //- longest path b/t  ANY TWO NODES
+        //- path does not need to pass via. root
+        
+        //TC & SC -> O(N)
+        
+        // this is the reference 
+        int diameter[] = new int[1];
+        ht(root,diameter);
+        return diameter[0];
+    }
+    private int ht(TreeNode root,int[] diameter){
+        if(root == null) return 0;
+        
+        int left = ht(root.left,diameter);
+        int right = ht(root.right,diameter);
+        diameter[0]= Math.max(diameter[0],left+right);
+        return 1+Math.max(left,right);
+        
+    }
+}
