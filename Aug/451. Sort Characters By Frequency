@@ -1,0 +1,23 @@
+//https://leetcode.com/submissions/detail/771301414/
+
+class Solution {
+    public String frequencySort(String s) {
+        //counting each char by using hashmap
+        HashMap<Character,Integer> m= new HashMap<>();
+        for(char ch : s.toCharArray())
+            m.put(ch,m.getOrDefault(ch,0)+1); // amazing count incrementer
+        
+        // storing acc to decreasing freq in a string using max heap
+        Queue<Character> maxHeap= new PriorityQueue<>((x,y) -> m.get(y)-m.get(x)); //x & y are constructors
+        maxHeap.addAll(m.keySet()); //putting map characters to heap
+        
+        // Stringbuilder
+        StringBuilder res = new StringBuilder();
+        while(!maxHeap.isEmpty()){
+            char curr = maxHeap.remove(); // curr char
+            for(int i=0;i<m.get(curr);i++) //putting heap chars to strbuilder
+                res.append(curr);
+        }
+        return res.toString();
+    }
+}
