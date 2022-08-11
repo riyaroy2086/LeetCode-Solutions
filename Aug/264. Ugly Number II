@@ -1,0 +1,29 @@
+//https://leetcode.com/submissions/detail/771265915/
+
+class Solution {
+    public int nthUglyNumber(int n) {
+        int m2,m3,m5;
+        m2=m3=m5=0;
+        
+        int arr[]= new int[n+1];
+        arr[0]=1; // 1 is the smallest ugly no.
+        
+        for(int i=1;i<n;i++){
+            //Tree structure 
+            int m_two=arr[m2]*2;
+            int m_three=arr[m3]*3;
+            int m_five=arr[m5]*5;
+            
+            arr[i]= min(m_two,m_three,m_five);
+            
+            if(arr[i]==m_two)m2++;
+            if(arr[i]==m_three)m3++;
+            if(arr[i]==m_five)m5++;
+            
+        }
+        return arr[n-1];
+    }
+        public int min(int a,int b,int c){
+           return ((a<b?a:b)<c)?(a<b?a:b):c; 
+    }
+}
