@@ -1,0 +1,57 @@
+// https://leetcode.com/submissions/detail/772071392/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+//zig zag traversal
+// 1
+// 20 9
+// 7 15
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        // Using a flag variable to change the duirection of flow from left to rt and rt to left
+        //Taking a queue to store the nodes
+        Queue<TreeNode> q=new LinkedList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        
+        if(root == null ) return res;
+        
+        //adding root to the queue
+        q.offer(root);
+        //declaring a boolean flag
+        //if flag =0 --> .offer in usual dircetion
+        // else if flag =1  --> .offer inm reverse direction
+        boolean flag = true; //1
+        while(!q.isEmpty()){
+            int lvl_size = q.size(); // size of each lvl
+            //sub arrayList for each operation
+            List<Integer> al = new ArrayList<>(lvl_size);
+            for(int i=0;i<lvl_size;i++){
+                //adding left and right nodes if +nt
+                if(q.peek().left != null) q.offer(q.peek().left);
+                if(q.peek().right != null) q.offer(q.peek().right);
+                
+                if(flag == true) al.add(q.poll().val); // in reverse order
+                else al.add(0,q.poll().val); // in usual order     
+            }
+            // turning flag non-functional
+            flag = !flag;
+            //storing al into res
+            res.add(al);
+        }
+        return res;
+    }
+}
