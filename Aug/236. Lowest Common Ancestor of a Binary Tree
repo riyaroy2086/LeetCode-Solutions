@@ -1,0 +1,30 @@
+// https://leetcode.com/submissions/detail/773550819/
+
+// Not a medium qs :)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//BRUTE FORCE SOLN OF TC _> O(N) & SC -> O(N)
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null ||root == p || root == q) return root;
+        // useful when we hv to find :
+        // Lowest Common Ancestor of 5 & 4 
+        // this will return 5
+        
+        TreeNode lt=lowestCommonAncestor(root.left,p,q); // recursions
+        TreeNode rt=lowestCommonAncestor(root.right,p,q);
+        
+        if(lt == null) return rt; // deadends
+        else if(rt == null) return lt;
+        else return root;
+
+    }
+}
