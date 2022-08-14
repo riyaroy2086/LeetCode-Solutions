@@ -1,0 +1,41 @@
+// https://leetcode.com/submissions/detail/773532428/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+// FOR BALANCED BINARY TREE 
+// RT HEIGHT - LEFT HEIGHT  <=1
+
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return DFS(root) != -1;
+        //returns -1 -> unbalanced 
+        //returns 1 --> balanceed btree
+    }
+    public int DFS(TreeNode root){
+        if(root == null) return 0;
+        int lt_ht=DFS(root.left);
+        if(lt_ht ==-1) return -1;
+        int rt_ht=DFS(root.right);
+        if(rt_ht ==-1) return -1;
+        
+        int diff = Math.abs(lt_ht-rt_ht) ;
+        if(diff >1) return -1; // unbalanced 
+        
+        return Math.max(lt_ht,rt_ht)+1;
+        
+    }
+}
