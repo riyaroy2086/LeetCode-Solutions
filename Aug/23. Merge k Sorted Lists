@@ -1,0 +1,41 @@
+// https://leetcode.com/submissions/detail/774591393/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        // imp qs
+        //not a hard qs
+        // we throw every node of every list in a min heap
+        // then when we remove it and add to a new list
+        // its a sorted list
+        
+        Queue<Integer> min_hp = new PriorityQueue<>();
+        // traversed each node of each list
+        for(ListNode head : lists){
+            // addded to the min heap
+            while(head != null){
+                min_hp.add(head.val);
+                head=head.next;
+            }
+        }
+        
+        ListNode d = new ListNode();
+        // dummy pointing towards head of the new list
+        ListNode head = d;
+        while(!min_hp.isEmpty()){
+            // inserting heap vals to the new list d
+            head.next=new ListNode(min_hp.remove());
+            head = head.next;
+        }
+        return d.next;
+    }
+}
