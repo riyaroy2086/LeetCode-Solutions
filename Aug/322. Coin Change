@@ -1,0 +1,25 @@
+// https://leetcode.com/submissions/detail/775476857/
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+         //this is 0 based 
+         int dp[]=new int[amount+1];
+         // we fill the dp array with amt+1
+         Arrays.fill(dp,amount+1);
+         // for 0 rs we need 0 rs
+         dp[0]=0;
+        
+         for(int i=0;i<amount+1;i++){
+             // now reaversing thru coin array
+             for(int j=0;j<coins.length;j++){
+                 if(coins[j] <= i){
+                     // i is curr operating no. 
+                     // i-coins[j]is the diff 
+                     // we need the min value of coin nums
+                     dp[i]=Math.min(dp[i],dp[i-coins[j]]+1);
+                 }
+             }
+         }
+         return dp[amount]> amount ? -1 : dp[amount];
+    }
+}
