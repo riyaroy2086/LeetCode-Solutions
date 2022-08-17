@@ -1,0 +1,38 @@
+// https://leetcode.com/submissions/detail/775924108/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+//not an med qs 
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        int res=0;
+        Queue<TreeNode> pq= new LinkedList<>();
+        pq.add(root);
+        //while not empty inserting the nodes in dummy tree
+        while(pq.size()>0){
+            int len=pq.size();
+            for(int i=1;i<=len;i++){
+                TreeNode d = pq.remove();
+                
+                if(d.right!= null) pq.add(d.right);
+                if(d.left!= null) pq.add(d.left);
+                res=d.val;
+            }
+        }
+      return res;  
+    }
+}
