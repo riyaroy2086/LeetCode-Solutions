@@ -1,0 +1,12 @@
+// https://leetcode.com/problems/is-subsequence/submissions/
+
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        // using two pointer and dp
+        int i=0;
+        // here t is the bigger char array so traversing it and matching it with s using another poiner
+        for(int j=0;j<t.length() && i <s.length();j++)
+            if(s.charAt(i)==t.charAt(j)) i++;
+        return i>=s.length();    
+    }
+}
