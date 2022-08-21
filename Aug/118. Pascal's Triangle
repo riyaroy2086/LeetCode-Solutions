@@ -1,0 +1,48 @@
+// https://leetcode.com/submissions/detail/779698267/
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> tri =  new ArrayList<List<Integer>>();
+        if(numRows ==0) return tri; // edge case
+        
+        // 1st row operation done :)
+        List<Integer> first_row = new ArrayList<>();
+        first_row.add(1);
+        tri.add(first_row);
+        
+        // 2nd row onwards
+        for(int i=1;i<numRows;i++){
+            List<Integer> prev_row = tri.get(i-1); // here the first_row is needed
+            List<Integer> curr_row = new ArrayList<>();
+            
+            //each row starts w/ 1 and ends w/ 1 
+            curr_row.add(1);
+            
+            //middle elements in the list
+            for(int j=1;j<i;j++)
+                curr_row.add(prev_row.get(j)+prev_row.get(j-1));
+            
+            //ends w/ 1
+            curr_row.add(1);
+            
+            tri.add(curr_row);
+        }
+        return tri;
+        // List<Integer> row = null; // current row
+        // List<Integer> prevrow = null; //previous row
+        //1st and last col of every row is 1
+//         for(int i=0;i<numRows;i++){
+//             //everytime we visit a new row , we initialize it with an empty array
+//             row=new ArrayList<Integer>();
+//             for(int j=0;j<=i;j++){ //no. of cols == no. of rows
+//                 if(j==0||j==i) row.add(1); //1st or last col
+//                 else
+//                     row.add(prevrow.get(j-1)+prevrow.get(j));
+                
+//             // current row bwcomes prev so that can be used in the next iteration
+//             prevrow=row;
+//             ans.add(row);    
+//             }
+//         }return ans;
+    }
+}
