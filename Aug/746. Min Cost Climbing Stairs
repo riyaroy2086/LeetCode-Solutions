@@ -1,0 +1,27 @@
+// https://leetcode.com/submissions/detail/714015371/
+
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        //ArrayList<Integer> a = new ArrayList<>();
+        // int sum=0;
+        // for(int i=0;i<cost.length-2;i++){
+        //     // if(cost[i+2] < cost[i+1]) sum+= cost[i+1];
+        //     if(cost[i+2] + cost[i] < cost[i+1] + cost[i]) {
+        //         //sum = cost[i];
+        //         sum += cost[i+2];
+        //         //sum+= cost[i+2];
+        //     }
+        //     else if(cost[i+2] + cost[i] >= cost[i+1] + cost[i]) {
+        //         sum += cost[i+1];
+        //     }
+        // }return sum;
+    
+        int last= cost[1],seclast=cost[0];
+        for(int i=2;i<cost.length;i++){
+            int temp= last;
+            last=Math.min(last,seclast) + cost[i];
+            seclast = temp;
+        }return Math.min(last,seclast);
+        
+    }
+}
