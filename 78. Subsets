@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/subsets/submissions/
+
+class Solution {
+    //SC-> O(N)// taking extra arraylist
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> sub = new ArrayList<>();
+        forSub(0,nums,new ArrayList<Integer>(),sub);
+        return sub;
+    }
+    
+    //recursive function
+    public void forSub(int i,int nums[],List<Integer> curr ,List<List<Integer>> sub){
+        //at the beginning we add copies of curr subsets to sub 
+        sub.add(new ArrayList<>(curr));
+        for(int j=i;j<nums.length;j++){
+            //adding thses nums to lt
+            curr.add(nums[j]);
+            //recursive call
+            // putting i will generate
+            //[[],[1],[1,2],[1,2,3],[1,3],[1,3,3],[2],[2,2],[2,2,3],[2,3],[2,3,3],[3],[3,2],[3,2,3],[3,3],[3,3,3]]
+            //which include copies
+            forSub(j+1,nums,curr,sub);
+            curr.remove(curr.size()-1); //coz it is the last no. we added
+        }
+    }
+}
