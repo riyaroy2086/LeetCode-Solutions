@@ -1,0 +1,17 @@
+ // https://leetcode.com/submissions/detail/789780815/
+
+        // old array -> new array 
+        // sort it
+        // even and odd position 
+        
+        int[] arr=Arrays.copyOf(nums,nums.length);
+        Arrays.sort(arr);
+        int len = nums.length-1;
+        
+        //for odd position
+        for(int i=1;i<nums.length;i+=2)
+            nums[i]=arr[len--]; 
+        
+        //for even position
+        for(int i=0;i<nums.length;i+=2)
+            nums[i]=arr[len--];
