@@ -1,0 +1,20 @@
+// https://leetcode.com/submissions/detail/790433212/
+
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+        int l=arr.length;
+        // one extra size is needeed to maintain exceptional bounds
+        int[] right_min = new int[l+1];
+        right_min[l]=Integer.MAX_VALUE; // Indentity of min
+        for(int i=l-1;i>=0;i--)
+            right_min[i]=Math.min(arr[i],right_min[i+1]); // uopdating min
+    //---------------------------------------------------------------------
+        int left_max=Integer.MIN_VALUE;  // Indentity of max
+        int c=0;
+        for(int i=0;i<l;i++){
+            left_max=Math.max(arr[i],left_max);
+            
+            if(left_max <= right_min[i+1])c++;                     
+        }return c;
+    }
+}
