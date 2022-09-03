@@ -1,0 +1,14 @@
+// https://leetcode.com/submissions/detail/790415658/
+
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+        int max=Integer.MIN_VALUE,c=0,l=arr.length;
+        for(int i=0;i<l;i++){
+             //updating max to find end-point of chunks
+            max=Math.max(max,arr[i]);
+            
+            if(i==max)c++;
+        }
+        return c;
+    }
+}
