@@ -1,0 +1,74 @@
+// https://leetcode.com/submissions/detail/803183520/
+
+class Solution {
+    public int findUnsortedSubarray(int[] nums) {
+        //traverse with two pointers
+        // forward pointer -> 
+        //if(nums[i]>nums[i+1])
+          // temp = i;
+        // backward pointer -> 
+        //if(nums[j]<nums[j+1])
+          // temp = j;
+        //diff = j
+        
+//         int f=0,b=0;
+        
+//         for(int i=0;i<nums.length-1;i++){
+//            if(nums[i]>nums[i+1])
+//            f = i; 
+//         }
+//         for(int i=nums.length;i>0;i--){
+//            if(nums[i]<nums[i+1])
+//            b = i; 
+//         }
+//         int diff = b-f+1;
+//         return diff;
+        
+        //TLE ------------------------------------------------------
+        
+        // Using Stack
+        
+        int f = nums.length-1,b=0;
+        Stack<Integer> sk = new Stack<>();
+        
+        // for the lower limit
+        for(int i=0;i<nums.length;){
+            if(sk.empty()){
+                sk.push(i);
+                i++;
+            }else{
+                if(nums[sk.peek()]>nums[i]) // if prev > next
+                {
+                    f = Math.min(f,sk.peek());
+                    sk.pop();
+                }else{
+                    sk.push(i);
+                    i++;
+                }
+                    
+            }
+        }
+        
+        sk.clear();
+        
+        // for the upper limit
+        for(int i=nums.length-1;i>=0;){
+            if(sk.empty()){
+                sk.push(i);
+                i--;
+            }else{
+                if(nums[sk.peek()]<nums[i]) 
+                {
+                    b = Math.max(b,sk.peek());
+                    sk.pop();
+                }else{
+                    sk.push(i);
+                    i--;
+                }       
+            }
+        }
+        if(nums.length==1) return 0;
+        else if(b>=f) return b-f+1;
+        else return 0;
+    }
+}
