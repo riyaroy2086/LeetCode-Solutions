@@ -1,0 +1,21 @@
+// https://leetcode.com/submissions/detail/806919205/
+
+class Solution {
+    public int matchPlayersAndTrainers(int[] players, int[] trainers) {
+        int p = players.length, t = trainers.length;
+        int sol =0;
+        Arrays.sort(players);
+        Arrays.sort(trainers);
+        //for(int i=0;i<p;i++){
+            for(int j=0;j<t;j++){
+                //if(players[i]== players[i-1]) break;
+                if(players[sol]<= trainers[j] && ++sol == players.length){
+                    //c++;
+                    //break;
+                    return sol;
+                }
+            }
+        //}
+        return sol;
+    }
+}
