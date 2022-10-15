@@ -1,0 +1,47 @@
+//https://leetcode.com/submissions/detail/823064294/
+
+class Solution {
+    List<List<String>> res;
+    public List<List<String>> partition(String s) {
+        // same as subsets just an extra function for palindromes using two pointers
+        res = new ArrayList<>();
+        
+        // new ArrayList temp  
+        List<String> temp = new ArrayList<>();
+        
+        // recursive call
+        palindromes(0,s,temp);
+        return res;    
+        
+    }
+    private void palindromes(int idx,String s,List<String> temp){
+        
+        //base case
+        if(idx == s.length()) // string exhausted
+        {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        //function 
+        for(int i=idx;i<s.length();i++){
+            //extra palidrome function to be added
+            // as not all subsets are included
+            if(yesPalindrome(s,idx,i)){
+                temp.add(s.substring(idx,i+1));
+                    // incrementing by one
+                palindromes(i+1,s,temp) ;  
+                    //reducing the arraylist size
+                temp.remove(temp.size()-1);    
+            }
+        }
+    }
+    
+    //palidromic yes/no func
+    static boolean yesPalindrome(String s, int start, int end){
+        while (start<=end){
+            if(s.charAt(start++) != s.charAt(end--)) return false;        
+        }
+        return true;
+    }
+}
