@@ -1,0 +1,44 @@
+//https://leetcode.com/submissions/detail/822508209/
+
+class Solution {
+    List<List<Integer>> res; // unversal scope 2D array
+    public List<List<Integer>> subsets(int[] nums) {
+        
+        // using recursion
+        // TC -> O(n*2^n)
+        
+        res = new ArrayList();
+        
+        // edge case
+        if(nums==null || nums.length ==0)
+            return res; // []
+        
+        // recursion
+        subsets(nums,new ArrayList<Integer>(), 0); // 1D array
+        return res; // the arrayList function
+        
+        
+    }
+    
+    public void subsets(int nums[],ArrayList<Integer> temp,int idx){
+        if(idx >= nums.length){  // base case
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        // pick or no pick 
+        
+        //pick
+        temp.add(nums[idx]); 
+        // calling the func
+        subsets(nums,temp,idx+1); 
+        // increment by 1
+        temp.remove(temp.size()-1);
+        
+        
+        //no pick
+        subsets(nums,temp,idx+1);
+        
+        
+    }
+}
