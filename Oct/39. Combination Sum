@@ -1,0 +1,30 @@
+//https://leetcode.com/submissions/detail/822521829/
+
+class Solution {
+    List<List<Integer>> res;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        res = new ArrayList();
+        
+        Arrays.sort(candidates);
+        sum(0,candidates,target,new ArrayList<>());
+        return res;
+        
+    }
+    
+    private void sum(int idx,int candidates[],int target,ArrayList<Integer> temp){
+        // base cases
+        if(target <0) return;
+        if(target ==0){
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        // recursion
+        for(int i=idx;i<candidates.length;i++){
+            temp.add(candidates[i]);
+            // increment by 1
+            sum(i,candidates,target-candidates[i],temp);
+            temp.remove(temp.size()-1);
+        }
+    }
+}
