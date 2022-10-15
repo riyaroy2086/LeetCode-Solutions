@@ -1,0 +1,43 @@
+// https://leetcode.com/submissions/detail/823085544/
+
+class Solution {
+    List<List<Integer>> res;
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        res= new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        
+        Arrays.sort(candidates);
+        // recurive call
+        sum(0,candidates,target,temp);
+        
+        return res;
+    }
+    
+    private void sum(int idx,int[] candidates,int target, List<Integer> temp){
+        
+        //base case
+        if(target ==0){
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for(int i=idx;i<candidates.length;i++){
+            //if duplicate exits continue
+            //omit
+            if(i>idx && candidates[i] == candidates[i-1]) continue;
+            // if sum exceeds then
+            if(candidates[i]> target) break; // break the loop 
+            
+            // same format
+            
+            temp.add(candidates[i]);
+            // incrementing the loop by 1 until it  exhausts
+            // total - candidates[i] logic
+            sum(i+1,candidates,target-candidates[i],temp);
+            
+            temp.remove(temp.size()-1);
+        }
+        
+        
+    }
+}
